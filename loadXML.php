@@ -23,7 +23,7 @@ public function insertxml() {
 	$Povrsina=$xml->Images->Name->TotalArea;
 
 	foreach ($xml->Images->Name as $name) {
-		$sql = "INSERT  INTO klisei (JobName, Name , PlateName, Datum, Povrsina)
+		$sql = "INSERT IGNORE INTO klisei (JobName, Name , PlateName, Datum, Povrsina)
 	VALUES ('$JobName', '$name', '$PlateName','$Datum', '$Povrsina')";
 	$conn=$this->connect();
 	?>
