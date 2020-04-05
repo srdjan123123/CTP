@@ -7,6 +7,7 @@ include 'header.html';
 include 'pretraganaziv.html';
 include 'kalendar.html';
 
+
 if (isset($_GET["name"])) {
 //  $naziv=$_GET["name"];
 //  echo $naziv;
