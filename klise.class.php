@@ -17,6 +17,17 @@ return $results;
 //$stmt->close();
 }
 
+protected function getNamepovrsina($naziv) {
+
+$sql = "SELECT SUM(Povrsina) FROM klisei WHERE Name LIKE ?";
+$conn=$this->connect();
+$stmt =$conn->prepare($sql);
+$stmt->bind_param('s', $naziv);
+$stmt->execute();
+$results = $stmt->get_result();
+return $results;
+//$stmt->close();
+}
 
 
 protected function deleteRn($id) {
@@ -47,9 +58,20 @@ $stmt->execute();
 $results = $stmt->get_result();
 return $results;
 }
+
+protected function getdatepovrsina($datum) {
+$sql = "SELECT SUM(Povrsina) FROM klisei WHERE Datum=?";
+$conn=$this->connect();
+$stmt =$conn->prepare($sql);
+$stmt->bind_param('s',$datum);
+$stmt->execute();
+$results = $stmt->get_result();
+return $results;
+}
+
 //Koristim za Klisee
 protected function getdate12($datum1, $datum2) {
-$sql = "SELECT * FROM klisei WHERE Datum BETWEEN ? AND ?";
+$sql = "SELECT * FROM klisei WHERE DATE(Datum) BETWEEN ? AND ?";
 $conn=$this->connect();
 $stmt =$conn->prepare($sql);
 $stmt->bind_param('ss',$datum1, $datum2);
@@ -58,7 +80,15 @@ $results = $stmt->get_result();
 return $results;
 }
 
-
+protected function getdatepovrsina12($datum1, $datum2) {
+$sql = "SELECT SUM(Povrsina) FROM klisei WHERE DATE(Datum) BETWEEN ? AND ?";
+$conn=$this->connect();
+$stmt =$conn->prepare($sql);
+$stmt->bind_param('ss',$datum1, $datum2);
+$stmt->execute();
+$results = $stmt->get_result();
+return $results;
+}
 
 protected function SetRn($RN,$Sifra,$Naziv,$BrojBoja,$Komentar,$StatusRn) {
 $sql = "INSERT INTO plan (RN, Sifra , NazivPosla, BrojBoja, Komentar, StatusRn)

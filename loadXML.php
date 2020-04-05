@@ -12,12 +12,18 @@ public function insertxml() {
 	$xml=simplexml_load_file("$filename") or die("Error: Cannot create object");
 	$JobName=$xml->JOB->JobName;
 	$PlateName=$xml->Plate->PlateName;
-	$Datum=substr($xml->JOB->Date,0,11);
+	//$Datum=$xml->JOB->Date;
+	/*$Datum=substr($xml->JOB->Date,0,11);
 	$Datum=date_create("$Datum");
-	$Datum=date_format($Datum,"d-m-Y");
+	$Datum=date_format($Datum,"d-m-Y");*/
+	$Datum=$xml->JOB->Date;
+	$Datum=date_create("$Datum");
+	$Datum=date_format($Datum,"Y-m-d");
+
 	$Povrsina=$xml->Images->Name->TotalArea;
+
 	foreach ($xml->Images->Name as $name) {
-		$sql = "INSERT IGNORE INTO klisei (JobName, Name , PlateName, Datum, Povrsina)
+		$sql = "INSERT  INTO klisei (JobName, Name , PlateName, Datum, Povrsina)
 	VALUES ('$JobName', '$name', '$PlateName','$Datum', '$Povrsina')";
 	$conn=$this->connect();
 	?>

@@ -1,14 +1,17 @@
 <?php
 
 
-include 'baza.php';
+include 'dbclass.php';
 include 'header.html';
 $komentar=$_GET["komentar"];
 $id=$_GET["id"];
-echo $komentar;
+/*echo $komentar;
 echo $id;
+*/
+class Update extends Baza {
+  public function update2($id, $komentar){
 $sql = "UPDATE klisei SET Komentar='$komentar' WHERE id='$id'";
-
+$conn=$this->connect();
 if ($conn->query($sql) === TRUE) {
     echo "Record updated successfully";
 } else {
@@ -25,7 +28,11 @@ echo "<tr><td><a href='edit.php?id=$id'>".$row["JobName"]."</a></td><td>".$row["
 
 
 $conn->close();
-
+}
+}
 //header("Location: /Klisei/edit.php");
+
+$objk=new Update;
+$objk->update2($id,$komentar);
 
 ?>

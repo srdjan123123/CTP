@@ -10,7 +10,7 @@ public function createtable() {
   JobName VARCHAR(20) NOT NULL,
   Name VARCHAR(250) NOT NULL,
   PlateName VARCHAR(15),
-  Datum VARCHAR(25),
+  Datum DATE,
   Komentar VARCHAR(50),
   Povrsina VARCHAR(15)
   )";
